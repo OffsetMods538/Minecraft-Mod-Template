@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "{{ cookiecutter.modId }}",
+	"version": "${modVersion}",
+	"name": "{{ cookiecutter.modName }}",
+	"description": "{{ cookiecutter.modDescription }}",
+	"authors": [
+		"{{ cookiecutter.modAuthor }}"
+	],
+	"contact": {
+		"sources": "{{ cookiecutter.modSources }}"
+	},
+	"license": "MIT",
+	"icon": "assets/{{ cookiecutter.modId }}/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"{{ cookiecutter.modGroup }}.{{ cookiecutter.modMainClass }}"
+		],
+		"client": [
+			"{{ cookiecutter.modGroup }}.{{ cookiecutter.modMainClass }}Client"
+		],
+		"preLaunch": [
+			"com.llamalad7.mixinextras.MixinExtrasBootstrap::init"
+		]
+	},
+	"mixins": [
+		"{{ cookiecutter.modId }}.mixins.json",
+		{
+			"config": "{{ cookiecutter.modId }}.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"accessWidener": "{{ cookiecutter.modId }}.accesswidener",
+	"depends": {
+		"minecraft": "${supportedMinecraftVersions}"
+	}
+}

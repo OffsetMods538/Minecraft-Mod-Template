@@ -1,0 +1,18 @@
+{
+	"minecraftVersion":           "1.19.3",
+	"yarnMappings":               "1.19.3+build.5",
+	"loaderVersion":              "0.14.14",
+
+	"fabricApiVersion":           "0.75.1+1.19.3",
+	"mixinExtrasVersion":         "0.2.0-beta.4",
+
+	"modId":                      "mod-template",
+	"modVersion":                 "1.0.0",
+	"modName":                    "Mod Template",
+	"modDescription":             "Adds nothing",
+	"modMainClass":               "ModTemplate",
+	"supportedMinecraftVersions": "~1.19",
+	"modGroup":                   "top.offsetmonkey538.template",
+	"modAuthor":                  "OffsetMonkey538",
+	"modSources":                 "https://github.offsetmonkey538.top/minecraft-mod-template"
+}
