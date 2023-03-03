@@ -34,10 +34,14 @@ os.rename("resources/mod-template.mixins.json", resourcesDir + "/{{ cookiecutter
 os.rename("resources/mod-template.client.mixins.json", clientResourcesDir + "/{{ cookiecutter.modId }}.client.mixins.json")
 
 
-
 os.system("gradle wrapper --gradle-version=8.0.1")
-
 
 
 os.rmdir("java")
 os.rmdir("resources")
+
+
+if "{{ cookiecutter.initGit }}" == "yes":
+    os.system("git init")
+    os.system("git branch -M master")
+    os.system("git remote add origin {{ cookiecutter.modSources }}.git")

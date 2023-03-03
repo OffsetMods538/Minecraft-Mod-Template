@@ -14,5 +14,10 @@
 	"supportedMinecraftVersions": "~1.19",
 	"modGroup":                   "top.offsetmonkey538.template",
 	"modAuthor":                  "OffsetMonkey538",
-	"modSources":                 "https://github.offsetmonkey538.top/minecraft-mod-template"
+	"modSources":                 "https://github.offsetmonkey538.top/minecraft-mod-template",
+
+	"initGit": [
+		"yes",
+		"no"
+	]
 }
