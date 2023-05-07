@@ -28,6 +28,9 @@ if "{{ cookiecutter.includeBlockRegistryClass }}" == "yes":
     os.makedirs(javaDir + "/block", exist_ok=True)
     os.rename("java/ModBlocks.java", javaDir + "/block/ModBlocks.java")
 
+if "{{ cookiecutter.includeItemRegistryClass }}" == "yes":
+    os.makedirs(javaDir + "/item", exist_ok=True)
+    os.rename("java/ModItems.java", javaDir + "/item/ModItems.java")
 
 os.rename("java/ModTemplate.java", javaDir + "/{{ cookiecutter.modMainClass}}.java")
 os.rename("java/ModTemplateClient.java", clientJavaDir + "/{{ cookiecutter.modMainClass}}Client.java")

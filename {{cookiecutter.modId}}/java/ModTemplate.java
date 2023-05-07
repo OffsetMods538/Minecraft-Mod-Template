@@ -8,6 +8,10 @@ import org.slf4j.LoggerFactory;
 
 import {{ cookiecutter.modGroup }}.block.ModBlocks;
 {%- endif %}
+{%- if cookiecutter.includeItemRegistryClass == "yes" %}
+
+import {{ cookiecutter.modGroup }}.item.ModItems;
+{%- endif %}
 
 public class {{ cookiecutter.modMainClass }} implements ModInitializer {
 	public static final String MOD_ID = "{{ cookiecutter.modId }}";
@@ -18,6 +22,9 @@ public class {{ cookiecutter.modMainClass }} implements ModInitializer {
 		// Do stuff
 		{%- if cookiecutter.includeBlockRegistryClass == "yes" %}
 		ModBlocks.register();
+		{%- endif %}
+		{%- if cookiecutter.includeItemRegistryClass == "yes" %}
+		ModItems.register();
 		{%- endif %}
 	}
 

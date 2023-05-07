@@ -21,6 +21,11 @@
 		"no"
 	],
 
+	"includeItemRegistryClass": [
+		"yes",
+		"no"
+	],
+
 	"initGit": [
 		"yes",
 		"no"
