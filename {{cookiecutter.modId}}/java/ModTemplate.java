@@ -1,7 +1,7 @@
 package {{ cookiecutter.modGroup }};
 
 import net.fabricmc.api.ModInitializer;
-
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,5 +12,9 @@ public class {{ cookiecutter.modMainClass }} implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		// Do stuff
+	}
+
+	public static Identifier id(String path) {
+		return new Identifier(MOD_ID, path);
 	}
 }
