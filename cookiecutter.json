@@ -16,6 +16,11 @@
 	"modAuthor":                  "OffsetMonkey538",
 	"modSources":                 "https://github.offsetmonkey538.top/minecraft-mod-template",
 
+	"includeBlockRegistryClass": [
+		"yes",
+		"no"
+	],
+
 	"initGit": [
 		"yes",
 		"no"

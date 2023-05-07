@@ -1,4 +1,5 @@
 import os
+import shutil
 
 directory = "{{ cookiecutter.modGroup.replace('.', '/') }}"
 
@@ -23,6 +24,11 @@ os.makedirs(clientResourcesDir, exist_ok=True)
 os.makedirs(assetsDir, exist_ok=True)
 
 
+if "{{ cookiecutter.includeBlockRegistryClass }}" == "yes":
+    os.makedirs(javaDir + "/block", exist_ok=True)
+    os.rename("java/ModBlocks.java", javaDir + "/block/ModBlocks.java")
+
+
 os.rename("java/ModTemplate.java", javaDir + "/{{ cookiecutter.modMainClass}}.java")
 os.rename("java/ModTemplateClient.java", clientJavaDir + "/{{ cookiecutter.modMainClass}}Client.java")
 
@@ -37,11 +43,11 @@ os.rename("resources/mod-template.client.mixins.json", clientResourcesDir + "/{{
 os.system("gradle wrapper --gradle-version=8.0.1")
 
 
-os.rmdir("java")
-os.rmdir("resources")
-
-
 if "{{ cookiecutter.initGit }}" == "yes":
     os.system("git init")
     os.system("git branch -M master")
     os.system("git remote add origin {{ cookiecutter.modSources }}.git")
+
+
+shutil.rmtree("java")
+shutil.rmtree("resources")
