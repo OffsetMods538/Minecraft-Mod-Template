@@ -12,6 +12,10 @@ import {{ cookiecutter.modGroup }}.block.ModBlocks;
 
 import {{ cookiecutter.modGroup }}.item.ModItems;
 {%- endif %}
+{%- if cookiecutter.includeConfigLibrary == "yes" %}
+
+import {{ cookiecutter.modGroup}}.config.ModConfig;
+{%- endif %}
 
 public class {{ cookiecutter.modMainClass }} implements ModInitializer {
 	public static final String MOD_ID = "{{ cookiecutter.modId }}";
@@ -20,6 +24,9 @@ public class {{ cookiecutter.modMainClass }} implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		// Do stuff
+		{%- if cookiecutter.includeConfigLibrary == "yes" %}
+		ModConfig.init();
+		{%- endif %}
 		{%- if cookiecutter.includeBlockRegistryClass == "yes" %}
 		ModBlocks.register();
 		{%- endif %}

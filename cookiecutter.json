@@ -26,6 +26,11 @@
 		"no"
 	],
 
+	"includeConfigLibrary": [
+		"yes",
+		"no"
+	],
+
 	"initGit": [
 		"yes",
 		"no"

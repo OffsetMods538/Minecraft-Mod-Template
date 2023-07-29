@@ -12,16 +12,6 @@ version = "${project.mod_version}+${project.minecraft_version}"
 outlet.mcVersionRange = project.supported_minecraft_versions
 
 
-repositories {
-	maven {
-		name = "JitPack"
-		url  = "https://jitpack.io"
-		content {
-			includeGroup "com.github.LlamaLad7"
-		}
-	}
-}
-
 loom {
 	splitEnvironmentSourceSets()
 
@@ -31,7 +21,7 @@ loom {
 			sourceSet sourceSets.client
 		}
 	}
-	
+
 	accessWidenerPath = file("src/main/resources/{{ cookiecutter.modId }}.accesswidener")
 }
 
@@ -43,9 +33,29 @@ configurations {
 
 
 	includeImplementation
-	
+
 	include.extendsFrom        includeImplementation
 	implementation.extendsFrom includeImplementation
+}
+
+repositories {
+	maven {
+		name = "JitPack"
+		url  = "https://jitpack.io"
+		content {
+			includeGroup "com.github.LlamaLad7"
+		}
+	}
+	{%- if cookiecutter.includeConfigLibrary == "yes" %}
+
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+		content {
+			includeGroup "maven.modrinth"
+		}
+	}
+	{%- endif %}
 }
 
 dependencies {
@@ -62,6 +72,11 @@ dependencies {
 	// Mixin Extras
 	includeImplementation "com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}"
 	annotationProcessor   "com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}"
+	{%- if cookiecutter.includeConfigLibrary == "yes" %}
+
+	// MonkeyConfig538
+	includeModImplementation "maven.modrinth:monkeyconfig538:${project.monkeyconfig538_version}"
+	{%- endif %}
 }
 
 processResources {
@@ -111,5 +126,8 @@ modrinth {
 
 	dependencies {
 		required.project "fabric-api" // TODO: remove if you don't need fabric api
+		{%- if cookiecutter.includeConfigLibrary == "yes" %}
+		embedded.project "monkeyconfig538"
+		{%- endif %}
 	}
 }

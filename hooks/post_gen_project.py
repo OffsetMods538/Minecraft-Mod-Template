@@ -32,6 +32,10 @@ if "{{ cookiecutter.includeItemRegistryClass }}" == "yes":
     os.makedirs(javaDir + "/item", exist_ok=True)
     os.rename("java/ModItems.java", javaDir + "/item/ModItems.java")
 
+if "{{ cookiecutter.includeConfigLibrary }}" == "yes":
+    os.makedirs(javaDir + "/config", exist_ok=True)
+    os.rename("java/ModConfig.java", javaDir + "/config/ModConfig.java")
+
 os.rename("java/ModTemplate.java", javaDir + "/{{ cookiecutter.modMainClass }}.java")
 os.rename("java/ModTemplateClient.java", clientJavaDir + "/{{ cookiecutter.modMainClass }}Client.java")
 
