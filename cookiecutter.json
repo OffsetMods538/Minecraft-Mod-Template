@@ -33,5 +33,9 @@
 	"initGit": [
 		"yes",
 		"no"
+	],
+
+	"_copy_without_render": [
+		"*workflows"
 	]
 }
