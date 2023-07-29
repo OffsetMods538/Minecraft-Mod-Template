@@ -25,7 +25,7 @@ public class {{ cookiecutter.modMainClass }} implements ModInitializer {
 	public void onInitialize() {
 		// Do stuff
 		{%- if cookiecutter.includeConfigLibrary == "yes" %}
-		ModConfig.init();
+		new ModConfig().init();
 		{%- endif %}
 		{%- if cookiecutter.includeBlockRegistryClass == "yes" %}
 		ModBlocks.register();
