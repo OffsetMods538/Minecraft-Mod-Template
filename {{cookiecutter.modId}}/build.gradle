@@ -12,19 +12,6 @@ version = "${project.mod_version}+${project.minecraft_version}"
 outlet.mcVersionRange = project.supported_minecraft_versions
 
 
-loom {
-	splitEnvironmentSourceSets()
-
-	mods {
-		modid {
-			sourceSet sourceSets.main
-			sourceSet sourceSets.client
-		}
-	}
-
-	accessWidenerPath = file("src/main/resources/{{ cookiecutter.modId }}.accesswidener")
-}
-
 configurations {
 	includeModImplementation
 
@@ -43,7 +30,7 @@ repositories {
 		name = "JitPack"
 		url  = "https://jitpack.io"
 		content {
-			includeGroup "com.github.LlamaLad7"
+			includeGroup "com.github.llamalad7.mixinextras"
 		}
 	}
 	{%- if cookiecutter.includeConfigLibrary == "yes" %}
@@ -70,13 +57,25 @@ dependencies {
 	// includeModImplementation fabricApi.module("fabric-api-base", project.fabric_api_version)
 
 	// Mixin Extras
-	includeImplementation "com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}"
-	annotationProcessor   "com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}"
+	includeImplementation annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:${project.mixinextras_version}")
 	{%- if cookiecutter.includeConfigLibrary == "yes" %}
 
 	// MonkeyConfig538
 	includeModImplementation "maven.modrinth:monkeyconfig538:${project.monkeyconfig538_version}"
 	{%- endif %}
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		modid {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+
+	accessWidenerPath = file("src/main/resources/{{ cookiecutter.modId }}.accesswidener")
 }
 
 processResources {
