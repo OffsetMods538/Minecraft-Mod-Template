@@ -32,18 +32,11 @@ repositories {
 		url  = "https://jitpack.io"
 		content {
 			includeGroup "com.github.llamalad7.mixinextras"
+			{%- if cookiecutter.includeConfigLibrary == "yes" %}
+			includeGroup "top.offsetmonkey538"
+			{%- endif %}
 		}
 	}
-	{%- if cookiecutter.includeConfigLibrary == "yes" %}
-
-	maven {
-		name = "Modrinth"
-		url = "https://api.modrinth.com/maven"
-		content {
-			includeGroup "maven.modrinth"
-		}
-	}
-	{%- endif %}
 }
 
 dependencies {
@@ -62,7 +55,7 @@ dependencies {
 	{%- if cookiecutter.includeConfigLibrary == "yes" %}
 
 	// MonkeyConfig538
-	includeModImplementation "maven.modrinth:monkeyconfig538:${project.monkeyconfig538_version}"
+	includeModImplementation "top.offsetmonkey538:monkeyconfig538:${project.monkeyconfig538_version}"
 	{%- endif %}
 }
 
