@@ -15,6 +15,7 @@ import {{ cookiecutter.modGroup }}.item.ModItems;
 {%- if cookiecutter.includeConfigLibrary == "yes" %}
 
 import {{ cookiecutter.modGroup}}.config.ModConfig;
+import top.offsetmonkey538.monkeyconfig538.ConfigManager;
 {%- endif %}
 
 public class {{ cookiecutter.modMainClass }} implements ModInitializer {
@@ -25,7 +26,7 @@ public class {{ cookiecutter.modMainClass }} implements ModInitializer {
 	public void onInitialize() {
 		// Do stuff
 		{%- if cookiecutter.includeConfigLibrary == "yes" %}
-		new ModConfig().init();
+		ConfigManager.init(new ModConfig(), MOD_ID);
 		{%- endif %}
 		{%- if cookiecutter.includeBlockRegistryClass == "yes" %}
 		ModBlocks.register();
@@ -33,6 +34,10 @@ public class {{ cookiecutter.modMainClass }} implements ModInitializer {
 		{%- if cookiecutter.includeItemRegistryClass == "yes" %}
 		ModItems.register();
 		{%- endif %}
+	}
+
+	public static ModConfig config() {
+		return (ModConfig) ConfigManager.get(MOD_ID);
 	}
 
 	public static Identifier id(String path) {
