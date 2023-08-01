@@ -1,7 +1,5 @@
 {
 	"minecraftVersion":           "1.19.3",
-	"yarnMappings":               "1.19.3+build.5",
-	"loaderVersion":              "0.14.14",
 
 	"fabricApiVersion":           "0.75.1+1.19.3",
 
