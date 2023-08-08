@@ -44,11 +44,13 @@ dependencies {
 	mappings "net.fabricmc:yarn:${outlet.yarnVersion(project.minecraft_version)}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${outlet.loaderVersion()}"
 
+	{%- if cookiecutter.includeFabricApi == "yes" %}
 	// Fabric API
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${outlet.fapiVersion(project.minecraft_version)}"
 
 	// Uncomment for including a module of fabric api
-	// includeModImplementation fabricApi.module("fabric-api-base", project.fabric_api_version)
+	// includeModImplementation fabricApi.module("fabric-api-base", outlet.fapiVersion(project.minecraft_version))
+	{%- endif %}
 
 	// Mixin Extras
 	includeImplementation annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:${project.mixinextras_version}")

@@ -1,8 +1,6 @@
 {
 	"minecraftVersion":           "1.19.3",
 
-	"fabricApiVersion":           "0.75.1+1.19.3",
-
 	"modId":                      "mod-template",
 	"modVersion":                 "1.0.0",
 	"modName":                    "Mod Template",
@@ -19,6 +17,11 @@
 	],
 
 	"includeItemRegistryClass": [
+		"yes",
+		"no"
+	],
+
+	"includeFabricApi": [
 		"yes",
 		"no"
 	],
