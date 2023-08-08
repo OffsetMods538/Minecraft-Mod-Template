@@ -1,12 +1,12 @@
 {
-	"minecraftVersion":           "1.19.3",
+	"minecraftVersion":           "1.20.1",
+	"supportedMinecraftVersions": "~1.20",
 
 	"modId":                      "mod-template",
 	"modVersion":                 "1.0.0",
 	"modName":                    "Mod Template",
 	"modDescription":             "Adds nothing",
 	"modMainClass":               "ModTemplate",
-	"supportedMinecraftVersions": "~1.19",
 	"modGroup":                   "top.offsetmonkey538.template",
 	"modAuthor":                  "OffsetMonkey538",
 	"modSources":                 "https://github.com/OffsetMods538/Minecraft-Mod-Template",
