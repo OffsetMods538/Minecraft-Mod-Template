@@ -36,11 +36,13 @@ public class {{ cookiecutter.modMainClass }} implements ModInitializer {
 		{%- endif %}
 	}
 
-	public static ModConfig config() {
-		return (ModConfig) ConfigManager.get(MOD_ID);
-	}
-
 	public static Identifier id(String path) {
 		return new Identifier(MOD_ID, path);
 	}
+	{%- if cookiecutter.includeConfigLibrary == "yes" %}
+
+	public static ModConfig config() {
+		return (ModConfig) ConfigManager.get(MOD_ID);
+	}
+	{%- endif %}
 }
