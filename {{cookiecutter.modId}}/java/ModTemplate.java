@@ -14,7 +14,7 @@ import {{ cookiecutter.modGroup }}.item.ModItems;
 {%- endif %}
 {%- if cookiecutter.includeConfigLibrary == "yes" %}
 
-import {{ cookiecutter.modGroup}}.config.ModConfig;
+import {{ cookiecutter.modGroup }}.config.ModConfig;
 import top.offsetmonkey538.monkeyconfig538.ConfigManager;
 {%- endif %}
 
