@@ -120,7 +120,9 @@ modrinth {
 	}
 
 	dependencies {
-		required.project "fabric-api" // TODO: remove if you don't need fabric api
+		{%- if cookiecutter.includeFabricApi == "yes" %}
+		required.project "fabric-api"
+		{%- endif %}
 		{%- if cookiecutter.includeConfigLibrary == "yes" %}
 		embedded.project "monkeyconfig538"
 		{%- endif %}
