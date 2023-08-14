@@ -34,10 +34,10 @@
 	"accessWidener": "{{ cookiecutter.modId }}.accesswidener",
 	"depends": {
 		{%- if cookiecutter.includeFabricApi == "yes" %}
-		"fabric-api": "*"
+		"fabric-api": "*",
 		{%- endif %}
 		{%- if cookiecutter.includeConfigLibrary == "yes" %}
-		"monkeyconfig538": ">= ${monkeyconfig538_version}"
+		"monkeyconfig538": ">= ${monkeyconfig538_version}",
 		{%- endif %}
 		"minecraft": "${supportedMinecraftVersions}"
 	}
