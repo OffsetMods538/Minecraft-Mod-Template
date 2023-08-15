@@ -47,7 +47,7 @@ os.rename("resources/mod-template.mixins.json", resourcesDir + "/{{ cookiecutter
 os.rename("resources/mod-template.client.mixins.json", clientResourcesDir + "/{{ cookiecutter.modId }}.client.mixins.json")
 
 
-os.system("gradle wrapper --gradle-version=8.1.1 --gradle-distribution-sha256-sum=e111cb9948407e26351227dabce49822fb88c37ee72f1d1582a69c68af2e702f")
+os.system("gradle wrapper --gradle-version=8.2.1 --gradle-distribution-sha256-sum=03ec176d388f2aa99defcadc3ac6adf8dd2bce5145a129659537c0874dea5ad1")
 
 
 if "{{ cookiecutter.initGit }}" == "yes":
