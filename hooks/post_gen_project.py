@@ -51,6 +51,7 @@ shutil.rmtree("resources")
 
 
 os.system("gradle wrapper --gradle-version=8.2.1 --gradle-distribution-sha256-sum=03ec176d388f2aa99defcadc3ac6adf8dd2bce5145a129659537c0874dea5ad1")
+os.system("gradle genSources")
 
 
 if "{{ cookiecutter.initGit }}" == "yes":
