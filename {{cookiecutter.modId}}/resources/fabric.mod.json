@@ -20,6 +20,11 @@
 		"client": [
 			"{{ cookiecutter.modGroup }}.{{ cookiecutter.modMainClass }}Client"
 		],
+		{%- if cookiecutter.includeDataGeneration == "yes" %}
+		"fabric-datagen": [
+			"{{ cookiecutter.modGroup }}.datagen.{{ cookiecutter.modMainClass }}Datagen"
+		],
+		{%- endif %}
 		"preLaunch": [
 			"com.llamalad7.mixinextras.MixinExtrasBootstrap::init"
 		]

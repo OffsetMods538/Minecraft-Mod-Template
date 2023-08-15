@@ -12,6 +12,43 @@ version = "${project.mod_version}+${project.minecraft_version}"
 outlet.mcVersionRange = project.supported_minecraft_versions
 
 
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		modid {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+
+	accessWidenerPath = file("src/main/resources/{{ cookiecutter.modId }}.accesswidener")
+			{%- if cookiecutter.includeDataGeneration == "yes" %}
+
+	runs {
+		datagenClient {
+			inherit client
+			name "Data Generation"
+			vmArg "-Dfabric-api.datagen"
+			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+			vmArg "-Dfabric-api.datagen.modid={{ cookiecutter.modId }}"
+
+			runDir "build/datagen"
+		}
+	}
+			{%- endif %}
+}
+
+sourceSets {
+	main {
+		resources {
+			srcDirs += [
+			        "src/main/generated"
+			]
+		}
+	}
+}
+
 configurations {
 	includeModImplementation
 
@@ -61,19 +98,6 @@ dependencies {
 	{%- endif %}
 }
 
-loom {
-	splitEnvironmentSourceSets()
-
-	mods {
-		modid {
-			sourceSet sourceSets.main
-			sourceSet sourceSets.client
-		}
-	}
-
-	accessWidenerPath = file("src/main/resources/{{ cookiecutter.modId }}.accesswidener")
-}
-
 processResources {
 	inputs.properties(Map.of(
 		"modVersion",                 project.version,
@@ -86,6 +110,8 @@ processResources {
 			"supportedMinecraftVersions", project.supported_minecraft_versions
 		))
 	}
+
+	exclude ".cache/**"
 }
 
 tasks.withType(JavaCompile).configureEach {

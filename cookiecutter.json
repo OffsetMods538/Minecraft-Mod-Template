@@ -21,12 +21,17 @@
 		"no"
 	],
 
-	"includeFabricApi": [
+	"includeConfigLibrary": [
 		"yes",
 		"no"
 	],
 
-	"includeConfigLibrary": [
+	"includeDataGeneration": [
+		"yes",
+		"no"
+	],
+
+	"includeFabricApi": [
 		"yes",
 		"no"
 	],
@@ -56,6 +61,7 @@
 		"includeBlockRegistryClass": "Do you want a block registry class? You will probably also want Fabric API.",
 		"includeItemRegistryClass": "Do you want an item registry class? You will probably also want Fabric API.",
 		"includeConfigLibrary": "Do you want a config class? This uses my own library.",
+		"includeDataGeneration": "Do you want data generation? This *will* require Fabric API.",
 		"includeFabricApi": "Do you want Fabric API?",
 		"initGit": "Do you want a git repository to be initialized?"
 	}

@@ -36,6 +36,12 @@ if "{{ cookiecutter.includeConfigLibrary }}" == "yes":
     os.makedirs(javaDir + "/config", exist_ok=True)
     os.rename("java/ModConfig.java", javaDir + "/config/ModConfig.java")
 
+if "{{ cookiecutter.includeDataGeneration }}" == "yes":
+    os.makedirs("src/main/generated")
+    os.makedirs(javaDir + "/datagen", exist_ok=True)
+    os.rename("java/ModDatagen.java", javaDir + "/datagen/{{ cookiecutter.modMainClass }}Datagen.java")
+
+
 os.rename("java/ModTemplate.java", javaDir + "/{{ cookiecutter.modMainClass }}.java")
 os.rename("java/ModTemplateClient.java", clientJavaDir + "/{{ cookiecutter.modMainClass }}Client.java")
 
