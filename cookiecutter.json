@@ -38,5 +38,25 @@
 
 	"_copy_without_render": [
 		"*workflows"
-	]
+	],
+
+	"__prompts__": {
+		"minecraftVersion": "Enter the minecraft version:",
+		"supportedMinecraftVersions": "Enter which versions of minecraft should the mod support:",
+
+		"modId": "Enter the id for your mod:",
+		"modVersion": "Enter the version of your mod:",
+		"modName": "Enter the name of your mod:",
+		"modDescription": "Enter a description for your mod:",
+		"modMainClass": "Enter a name for your mods main class:",
+		"modGroup": "Enter the maven group for your mod:",
+		"modAuthor": "Enter the name of the author of the mod:",
+		"modSources": "Enter the link to your mods sources:",
+
+		"includeBlockRegistryClass": "Do you want a block registry class? You will probably also want Fabric API.",
+		"includeItemRegistryClass": "Do you want an item registry class? You will probably also want Fabric API.",
+		"includeConfigLibrary": "Do you want a config class? This uses my own library.",
+		"includeFabricApi": "Do you want Fabric API?",
+		"initGit": "Do you want a git repository to be initialized?"
+	}
 }
