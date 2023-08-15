@@ -52,6 +52,8 @@ os.system("gradle wrapper --gradle-version=8.2.1 --gradle-distribution-sha256-su
 
 if "{{ cookiecutter.initGit }}" == "yes":
     os.system("git init")
+    os.system("git add --all")
+    os.system("git commit -m \"Initial Commit\"")
     os.system("git branch -M master")
     os.system("git remote add origin {{ cookiecutter.modSources }}.git")
 
