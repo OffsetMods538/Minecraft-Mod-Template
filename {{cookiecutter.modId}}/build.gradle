@@ -100,14 +100,20 @@ dependencies {
 
 processResources {
 	inputs.properties(Map.of(
-		"modVersion",                 project.version,
-		"supportedMinecraftVersions", project.supported_minecraft_versions
+			"modVersion",                 project.version,
+			{%- if cookiecutter.includeConfigLibrary == "yes" %}
+			"monkeyconfig538_version",    project.monkeyconfig538_version,
+			{%- endif %}
+			"supportedMinecraftVersions", project.supported_minecraft_versions
 	))
 
 	filesMatching("fabric.mod.json") {
 		expand(Map.of(
-			"modVersion",                 project.version,
-			"supportedMinecraftVersions", project.supported_minecraft_versions
+				"modVersion",                 project.version,
+				{%- if cookiecutter.includeConfigLibrary == "yes" %}
+				"monkeyconfig538_version",    project.monkeyconfig538_version,
+				{%- endif %}
+				"supportedMinecraftVersions", project.supported_minecraft_versions
 		))
 	}
 
