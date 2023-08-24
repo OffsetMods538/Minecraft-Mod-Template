@@ -42,7 +42,7 @@
 		"fabric-api": "*",
 		{%- endif %}
 		{%- if cookiecutter.includeConfigLibrary == "yes" %}
-		"monkeyconfig538": ">= ${monkeyconfig538_version}",
+		"monkeyconfig538": ">=${monkeyconfig538_version}",
 		{%- endif %}
 		"minecraft": "${supportedMinecraftVersions}"
 	}
