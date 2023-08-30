@@ -156,7 +156,9 @@ modrinth {
 		required.project "fabric-api"
 		{%- endif %}
 		{%- if cookiecutter.includeConfigLibrary == "yes" %}
-		embedded.project("monkeyconfig538", project.monkeyconfig538_version)
+		embedded.version "monkeyconfig538", project.monkeyconfig538_version
 		{%- endif %}
 	}
 }
+
+tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
