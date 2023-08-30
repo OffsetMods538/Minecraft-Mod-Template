@@ -8,7 +8,9 @@
 		"{{ cookiecutter.modAuthor }}"
 	],
 	"contact": {
-		"sources": "{{ cookiecutter.modSources }}"
+		"sources": "{{ cookiecutter.modSources }}",
+		"issues": "{{ cookiecutter.modSources }}/issues",
+		"homepage": "https://modrinth.com/mod/{{ cookiecutter.modId }}"
 	},
 	"license": "MIT",
 	"icon": "assets/{{ cookiecutter.modId }}/icon.png",
