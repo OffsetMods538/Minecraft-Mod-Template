@@ -50,6 +50,7 @@ loom {
 	{%- endif %}
 }
 
+{%- if cookiecutter.includeDataGeneration == "yes" %}
 sourceSets {
 	main {
 		resources {
@@ -59,6 +60,7 @@ sourceSets {
 		}
 	}
 }
+{%- endif %}
 
 configurations {
 	includeModImplementation
