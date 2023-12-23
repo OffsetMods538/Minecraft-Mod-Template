@@ -25,9 +25,6 @@ os.makedirs(assetsDir, exist_ok=True)
 
 os.makedirs("run/server", exist_ok=True)
 
-if "{{ cookiecutter.includeDataGeneration }}" == "yes":
-    os.makedirs("src/main/generated")
-
 
 if "{{ cookiecutter.includeBlockRegistryClass }}" == "yes":
     os.makedirs(javaDir + "/block", exist_ok=True)
@@ -42,7 +39,7 @@ if "{{ cookiecutter.includeConfigLibrary }}" == "yes":
     os.rename("java/ModConfig.java", javaDir + "/config/ModConfig.java")
 
 if "{{ cookiecutter.includeDataGeneration }}" == "yes":
-    os.makedirs("src/main/generated")
+    os.makedirs("src/main/generated", exist_ok=True)
     os.makedirs(javaDir + "/datagen", exist_ok=True)
     os.rename("java/ModDatagen.java", javaDir + "/datagen/{{ cookiecutter.modMainClass }}Datagen.java")
 
