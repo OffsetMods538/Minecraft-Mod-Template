@@ -34,7 +34,7 @@ loom {
 	}
 
 	accessWidenerPath = file("src/main/resources/{{ cookiecutter.modId }}.accesswidener")
-			{%- if cookiecutter.includeDataGeneration == "yes" %}
+	{%- if cookiecutter.includeDataGeneration == "yes" %}
 
 	runs {
 		datagenClient {
@@ -47,7 +47,7 @@ loom {
 			runDir "build/datagen"
 		}
 	}
-			{%- endif %}
+	{%- endif %}
 }
 
 sourceSets {
