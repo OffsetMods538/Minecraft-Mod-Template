@@ -26,11 +26,15 @@ jobs:
       - name: Generate resources with Gradle
         continue-on-error: true
         uses: gradle/gradle-build-action@v2
+        env:
+          DISABLE_PROPERTIES_UPDATE: true
         with:
           arguments: runDatagenClient
 
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
+        env:
+          DISABLE_PROPERTIES_UPDATE: true
         with:
           arguments: build
 
