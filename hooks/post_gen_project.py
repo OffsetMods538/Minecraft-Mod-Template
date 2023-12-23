@@ -23,6 +23,9 @@ os.makedirs(clientResourcesDir, exist_ok=True)
 
 os.makedirs(assetsDir, exist_ok=True)
 
+if "{{ cookiecutter.includeDataGeneration }}" == "yes":
+    os.makedirs("src/main/generated")
+
 
 if "{{ cookiecutter.includeBlockRegistryClass }}" == "yes":
     os.makedirs(javaDir + "/block", exist_ok=True)
