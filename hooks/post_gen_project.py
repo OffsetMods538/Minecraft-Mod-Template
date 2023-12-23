@@ -23,6 +23,8 @@ os.makedirs(clientResourcesDir, exist_ok=True)
 
 os.makedirs(assetsDir, exist_ok=True)
 
+os.makedirs("run/server", exist_ok=True)
+
 if "{{ cookiecutter.includeDataGeneration }}" == "yes":
     os.makedirs("src/main/generated")
 
