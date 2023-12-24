@@ -58,9 +58,8 @@ shutil.rmtree("java")
 shutil.rmtree("resources")
 
 
-os.system("gradle wrapper --gradle-version=8.5 --gradle-distribution-sha256-sum=9d926787066a081739e8200858338b4a69e837c3a821a33aca9db09dd4a41026")
-os.system("gradle outletPropertiesUpdate")
-os.system("gradle genSourcesWithFernFlower")
+os.system("./gradlew outletPropertiesUpdate")
+os.system("./gradlew genSourcesWithFernFlower")
 
 
 if "{{ cookiecutter.initGit }}" == "yes":
