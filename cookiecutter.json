@@ -41,10 +41,6 @@
 		"no"
 	],
 
-	"_copy_without_render": [
-		"*workflows"
-	],
-
 	"__prompts__": {
 		"minecraftVersion": "Enter the minecraft version:",
 		"supportedMinecraftVersions": "Enter which versions of minecraft should the mod support:",

@@ -20,17 +20,16 @@ jobs:
           distribution: 'temurin'
 
       - name: Make gradle wrapper executable
-        if: ${{ runner.os != 'Windows' }}
+        if: {{ '${{ runner.os != \'Windows\' }}' }}
         run: chmod +x ./gradlew
-
+{% if cookiecutter.includeDataGeneration == "yes" %}
       - name: Generate resources with Gradle
-        continue-on-error: true
         uses: gradle/gradle-build-action@v2
         env:
           DISABLE_PROPERTIES_UPDATE: true
         with:
           arguments: runDatagenClient
-
+{% endif %}
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         env:
