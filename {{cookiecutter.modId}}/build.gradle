@@ -88,16 +88,15 @@ configurations {
 
 repositories {
 	mavenCentral()
+	{%- if cookiecutter.includeConfigLibrary == "yes" %}
 	maven {
 		name = "JitPack"
 		url  = "https://jitpack.io"
 		content {
-			includeGroup "com.github.llamalad7.mixinextras"
-			{%- if cookiecutter.includeConfigLibrary == "yes" %}
 			includeGroup "top.offsetmonkey538"
-			{%- endif %}
 		}
 	}
+	{%- endif %}
 }
 
 dependencies {
@@ -113,8 +112,6 @@ dependencies {
 	// includeModImplementation fabricApi.module("fabric-api-base", project.fapi_version)
 	{%- endif %}
 
-	// Mixin Extras
-	includeImplementation annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:${project.mixinextras_version}")
 	{%- if cookiecutter.includeConfigLibrary == "yes" %}
 
 	// MonkeyConfig538
