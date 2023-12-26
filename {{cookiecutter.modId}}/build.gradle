@@ -130,7 +130,7 @@ processResources {
 
 	filesMatching("fabric.mod.json") {
 		expand(Map.of(
-				"modVersion",                 project.version,
+				"modVersion",                 project.mod_version,
 				{%- if cookiecutter.includeConfigLibrary == "yes" %}
 				"monkeyconfig538_version",    project.monkeyconfig538_version,
 				{%- endif %}
