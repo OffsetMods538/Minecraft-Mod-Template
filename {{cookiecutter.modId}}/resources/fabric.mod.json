@@ -40,8 +40,8 @@
 		{%- if cookiecutter.includeFabricApi == "yes" %}
 		"fabric-api": "*",
 		{%- endif %}
-		{%- if cookiecutter.includeConfigLibrary == "yes" %}
-		"monkeyconfig538": ">=${monkeyconfig538_version}",
+		{%- if cookiecutter.includeMonkeyLib538 == "yes" %}
+		"monkeylib538": ">=${monkeylib538_version}",
 		{%- endif %}
 		"minecraft": "${supportedMinecraftVersions}"
 	}

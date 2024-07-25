@@ -34,7 +34,7 @@ if "{{ cookiecutter.includeItemRegistryClass }}" == "yes":
     os.makedirs(javaDir + "/item", exist_ok=True)
     os.rename("java/ModItems.java", javaDir + "/item/ModItems.java")
 
-if "{{ cookiecutter.includeConfigLibrary }}" == "yes":
+if "{{ cookiecutter.includeConfigClass }}" == "yes":
     os.makedirs(javaDir + "/config", exist_ok=True)
     os.rename("java/ModConfig.java", javaDir + "/config/ModConfig.java")
 
@@ -59,7 +59,7 @@ shutil.rmtree("resources")
 
 
 os.system("./gradlew outletPropertiesUpdate")
-os.system("./gradlew genSourcesWithFernFlower")
+os.system("./gradlew genSourcesWithVineflower")
 
 
 if "{{ cookiecutter.initGit }}" == "yes":
@@ -68,3 +68,4 @@ if "{{ cookiecutter.initGit }}" == "yes":
     os.system("git commit -m \"Initial Commit\"")
     os.system("git branch -M master")
     os.system("git remote add origin {{ cookiecutter.modSources }}.git")
+    os.system("git push --set-upstream origin master --force")

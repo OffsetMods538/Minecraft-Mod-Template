@@ -1,15 +1,16 @@
 {
-	"minecraftVersion":           "1.20.4",
-	"supportedMinecraftVersions": "~1.20",
+	"minecraftVersion":           "1.21",
+	"supportedMinecraftVersions": ">=1.20 <=1.21",
 
-	"modId":                      "mod-template",
-	"modVersion":                 "1.0.0",
 	"modName":                    "Mod Template",
+	"modId":                      "{{ cookiecutter.modName|lower|replace(' ', '-') }}",
+	"modVersion":                 "1.0.0",
 	"modDescription":             "Adds nothing",
-	"modMainClass":               "ModTemplate",
-	"modGroup":                   "top.offsetmonkey538.template",
+	"modMainClass":               "{{ cookiecutter.modName|replace(' ', '') }}",
+	"modGroup":                   "top.offsetmonkey538.{{ cookiecutter.modId|replace('-', '') }}",
 	"modAuthor":                  "OffsetMonkey538",
-	"modSources":                 "https://github.com/OffsetMods538/Minecraft-Mod-Template",
+	"modOrganization":            "OffsetMods538",
+	"modSources":                 "https://github.com/{% if cookiecutter.modOrganization == '' %}{{ cookiecutter.modAuthor }}{% else %}{{ cookiecutter.modOrganization }}{% endif %}/{{ cookiecutter.modName|replace(' ', '-') }}",
 
 	"includeBlockRegistryClass": [
 		"yes",
@@ -21,7 +22,12 @@
 		"no"
 	],
 
-	"includeConfigLibrary": [
+	"includeConfigClass": [
+		"yes",
+		"no"
+	],
+
+	"includeMonkeyLib538": [
 		"yes",
 		"no"
 	],
@@ -52,11 +58,13 @@
 		"modMainClass": "Enter a name for your mods main class:",
 		"modGroup": "Enter the maven group for your mod:",
 		"modAuthor": "Enter the name of the author of the mod:",
+		"modOrganization": "Enter the name of the GitHub organization of the mod, use a space if there is none:",
 		"modSources": "Enter the link to your mods sources:",
 
 		"includeBlockRegistryClass": "Do you want a block registry class? You will probably also want Fabric API.",
 		"includeItemRegistryClass": "Do you want an item registry class? You will probably also want Fabric API.",
-		"includeConfigLibrary": "Do you want a config class? This uses my own library.",
+		"includeConfigClass": "Do you want a config class? This *will* require MonkeyLib538.",
+		"includeMonkeyLib538": "Do you want to include MonkeyLib538? This is my own library.",
 		"includeDataGeneration": "Do you want data generation? This *will* require Fabric API.",
 		"includeFabricApi": "Do you want Fabric API?",
 		"initGit": "Do you want a git repository to be initialized?"

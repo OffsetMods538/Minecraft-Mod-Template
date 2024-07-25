@@ -1,3 +1,5 @@
+import dex.plugins.outlet.v2.util.ReleaseType
+
 plugins {
 	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'io.github.dexman545.outlet' version '1.6.1'
@@ -13,6 +15,7 @@ version = "${project.mod_version}+${project.minecraft_version}"
 outlet {
 	maintainPropertiesFile = System.getenv("DISABLE_PROPERTIES_UPDATE") == null
 	mcVersionRange = project.supported_minecraft_versions
+	allowedReleaseTypes = Set.of(ReleaseType.RELEASE)
 	propertiesData = [
 			{%- if cookiecutter.includeFabricApi == "yes" %}
 			'fapi_version': outlet.fapiVersion(project.minecraft_version),
@@ -58,6 +61,7 @@ loom {
 afterEvaluate {
 	loom.runs.configureEach {
 		vmArg "-javaagent:${configurations.compileClasspath.find{ it.name.contains("sponge-mixin") }}"
+		if (System.getenv("DISABLE_PROPERTIES_UPDATE") == null) vmArg "-Ddevauth.enabled=true"
 	}
 }
 
@@ -88,12 +92,20 @@ configurations {
 
 repositories {
 	mavenCentral()
-	{%- if cookiecutter.includeConfigLibrary == "yes" %}
+	mavenLocal()
 	maven {
-		name = "JitPack"
-		url  = "https://jitpack.io"
+		name = "DevAuth"
+		url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1"
 		content {
-			includeGroup "top.offsetmonkey538"
+			includeGroup "me.djtheredstoner"
+		}
+	}
+	{%- if cookiecutter.includeMonkeyLib538 == "yes" %}
+	maven {
+		name = "OffsetMods538"
+		url  = "https://maven.offsetmonkey538.top/releases"
+		content {
+			includeGroup "top.offsetmonkey538.monkeylib538"
 		}
 	}
 	{%- endif %}
@@ -104,6 +116,9 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_version}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
+	// DevAuth
+	modRuntimeOnly "me.djtheredstoner:DevAuth-fabric:${devauth_version}"
+
 	{%- if cookiecutter.includeFabricApi == "yes" %}
 	// Fabric API
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fapi_version}"
@@ -112,30 +127,26 @@ dependencies {
 	// includeModImplementation fabricApi.module("fabric-api-base", project.fapi_version)
 	{%- endif %}
 
-	{%- if cookiecutter.includeConfigLibrary == "yes" %}
+	{%- if cookiecutter.includeMonkeyLib538 == "yes" %}
 
-	// MonkeyConfig538
-	includeModImplementation "top.offsetmonkey538:monkeyconfig538:${project.monkeyconfig538_version}"
+	// MonkeyLib538
+	modImplementation "top.offsetmonkey538.monkeylib538:monkeylib538:${project.monkeylib538_version}"
 	{%- endif %}
 }
 
 processResources {
-	inputs.properties(Map.of(
+	final Map properties = Map<String, String>.of(
 			"modVersion",                 project.mod_version,
-			{%- if cookiecutter.includeConfigLibrary == "yes" %}
-			"monkeyconfig538_version",    project.monkeyconfig538_version,
+			{%- if cookiecutter.includeMonkeyLib538 == "yes" %}
+			"monkeylib538_version",       project.monkeylib538_version,
 			{%- endif %}
 			"supportedMinecraftVersions", project.supported_minecraft_versions
-	))
+	)
+
+	inputs.properties(properties)
 
 	filesMatching("fabric.mod.json") {
-		expand(Map.of(
-				"modVersion",                 project.mod_version,
-				{%- if cookiecutter.includeConfigLibrary == "yes" %}
-				"monkeyconfig538_version",    project.monkeyconfig538_version,
-				{%- endif %}
-				"supportedMinecraftVersions", project.supported_minecraft_versions
-		))
+		expand(properties)
 	}
 
 	exclude ".cache/**"
@@ -167,17 +178,15 @@ modrinth {
 	additionalFiles = [sourcesJar.archiveFile]
 	gameVersions = outlet.mcVersions()
 	syncBodyFrom = rootProject.file("README.md").text
-	def changelogFile = rootProject.file("CHANGELOG.md")
-	if (changelogFile.exists()) {
-		changelog = changelogFile.text
-	}
+	def changelogEnv = System.getenv("VERSION_CHANGELOG")
+	if (changelogEnv != null) changelog = changelogEnv
 
 	dependencies {
 		{%- if cookiecutter.includeFabricApi == "yes" %}
 		required.project "fabric-api"
 		{%- endif %}
-		{%- if cookiecutter.includeConfigLibrary == "yes" %}
-		embedded.version "monkeyconfig538", project.monkeyconfig538_version
+		{%- if cookiecutter.includeMonkeyLib538 == "yes" %}
+		embedded.project "monkeylib538"
 		{%- endif %}
 	}
 }
