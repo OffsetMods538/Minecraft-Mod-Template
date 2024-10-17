@@ -91,6 +91,12 @@ configurations {
 
 	include.extendsFrom        includeImplementation
 	implementation.extendsFrom includeImplementation
+
+
+	includeApi
+
+	include.extendsFrom includeApi
+	api.extendsFrom     includeApi
 }
 
 repositories {
