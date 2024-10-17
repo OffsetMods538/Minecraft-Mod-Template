@@ -117,7 +117,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// DevAuth
-	modRuntimeOnly "me.djtheredstoner:DevAuth-fabric:${devauth_version}"
+	modLocalRuntime "me.djtheredstoner:DevAuth-fabric:${devauth_version}"
 
 	{%- if cookiecutter.includeFabricApi == "yes" %}
 	// Fabric API
