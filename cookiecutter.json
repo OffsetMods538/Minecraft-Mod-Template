@@ -42,6 +42,11 @@
 		"no"
 	],
 
+	"isLibrary": [
+		"yes",
+		"no"
+	],
+
 	"initGit": [
 		"yes",
 		"no"
@@ -67,6 +72,7 @@
 		"includeMonkeyLib538": "Do you want to include MonkeyLib538? This is my own library.",
 		"includeDataGeneration": "Do you want data generation? This *will* require Fabric API.",
 		"includeFabricApi": "Do you want Fabric API?",
+		"isLibrary": "Enables javadoc, maven publishing. Do not enable this unless you're me",
 		"initGit": "Do you want a git repository to be initialized?"
 	}
 }

@@ -43,6 +43,9 @@ if "{{ cookiecutter.includeDataGeneration }}" == "yes":
     os.makedirs(javaDir + "/datagen", exist_ok=True)
     os.rename("java/ModDatagen.java", javaDir + "/datagen/{{ cookiecutter.modMainClass }}Datagen.java")
 
+if "{{ cookiecutter.isLibrary }}" == "yes":
+    os.rename("other/javadoc-stylesheet.css", "javadoc-stylesheet.css")
+
 
 os.rename("java/ModTemplate.java", javaDir + "/{{ cookiecutter.modMainClass }}.java")
 os.rename("java/ModTemplateClient.java", clientJavaDir + "/{{ cookiecutter.modMainClass }}Client.java")
@@ -56,6 +59,7 @@ os.rename("resources/mod-template.client.mixins.json", clientResourcesDir + "/{{
 
 shutil.rmtree("java")
 shutil.rmtree("resources")
+shutil.rmtree("other")
 
 
 os.system("./gradlew outletPropertiesUpdate")

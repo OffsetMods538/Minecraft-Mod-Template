@@ -23,12 +23,12 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           cache-read-only: false
-
 {% if cookiecutter.includeDataGeneration == "yes" %}
       - name: Generate resources with Gradle
         run: ./gradlew runDatagenClient
         env:
           DISABLE_PROPERTIES_UPDATE: true
+
 {% endif %}
       - name: Build with Gradle
         run: ./gradlew build

@@ -4,13 +4,20 @@ plugins {
 	id 'fabric-loom' version '1.8-SNAPSHOT'
 	id 'io.github.dexman545.outlet' version '1.6.1'
 	id 'com.modrinth.minotaur' version '2.+'
+	{%- if cookiecutter.isLibrary == "yes" %}
+	id 'maven-publish'
+	{%- endig %}
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = "{{ cookiecutter.modId }}"
+group = "{{ cookiecutter.modGroup }}"
 version = "${project.mod_version}+${project.minecraft_version}"
+{%- if cookiecutter.isLibrary == "yes" %}
+if (System.getenv("IS_DEBUG") == "true") version = "${version}-${System.currentTimeMillis()}"
+{%- endif %}
 
 outlet {
 	maintainPropertiesFile = System.getenv("DISABLE_PROPERTIES_UPDATE") == null
@@ -167,7 +174,16 @@ tasks.withType(JavaCompile).configureEach {
 
 java {
 	withSourcesJar()
+	{%- if cookiecutter.isLibrary == "yes" %}
+	withJavadocJar()
+	{%- endif %}
 }
+
+{%- if cookiecutter.isLibrary == "yes" %}
+tasks.named("javadoc", Javadoc) {
+	options.addFileOption('--add-stylesheet', project.file("javadoc-stylesheet.css"))
+}
+{%- endif %}
 
 jar {
 	from("LICENSE") {
@@ -203,3 +219,34 @@ modrinth {
 }
 
 tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
+
+{%- if cookiecutter.isLibrary == "yes" %}
+publishing {
+	repositories {
+		maven {
+			name = "OffsetMonkey538"
+			url = "https://maven.offsetmonkey538.top/releases"
+			credentials {
+				username = providers.gradleProperty("OffsetMonkey538Username").getOrElse(System.getenv("MAVEN_USERNAME"))
+				password = providers.gradleProperty("OffsetMonkey538Password").getOrElse(System.getenv("MAVEN_PASSWORD"))
+			}
+			authentication {
+				basic(BasicAuthentication)
+			}
+		}
+	}
+	publications {
+		maven(MavenPublication) {
+			artifactId = "{{ cookiecutter.modId }}"
+
+			from(components["java"])
+		}
+	}
+	tasks.publishMavenPublicationToMavenLocal.doLast {
+		if (System.getenv("IS_DEBUG") == "true") System.out.println("Version: " + version)
+	}
+	tasks.publishMavenPublicationToOffsetMonkey538Repository.doLast {
+		if (System.getenv("IS_DEBUG") == "true") System.out.println("Version: " + version)
+	}
+}
+{%- endif %}
