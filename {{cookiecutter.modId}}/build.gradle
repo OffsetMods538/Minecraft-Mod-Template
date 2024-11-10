@@ -6,7 +6,7 @@ plugins {
 	id 'com.modrinth.minotaur' version '2.+'
 	{%- if cookiecutter.isLibrary == "yes" %}
 	id 'maven-publish'
-	{%- endig %}
+	{%- endif %}
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
