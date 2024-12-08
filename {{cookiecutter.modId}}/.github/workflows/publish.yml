@@ -49,7 +49,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: build/libs/*.jar
-{% if cookiecutter.includeDataGeneration == "yes" %}
+{% if cookiecutter.isLibrary == "yes" %}
 
       - name: Publish to Maven
         run: ./gradlew publishMavenPublicationToOffsetMonkey538Repository
