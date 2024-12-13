@@ -47,7 +47,7 @@ public class {{ cookiecutter.modMainClass }} implements ModInitializer {
 		{%- if cookiecutter.includeMonkeyLib538 == "yes" %}
 		return IdentifierUtils.INSTANCE.of(MOD_ID, path);
 		{%- else %}
-		return new Identifier(MOD_ID, path);
+		return Identifier.of(MOD_ID, path);
 		{%- endif %}
 	}
 }
