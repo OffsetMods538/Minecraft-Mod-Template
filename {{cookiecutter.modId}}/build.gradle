@@ -181,7 +181,19 @@ java {
 
 {%- if cookiecutter.isLibrary == "yes" %}
 tasks.named("javadoc", Javadoc) {
-	options.addFileOption('--add-stylesheet', project.file("javadoc-stylesheet.css"))
+	options.addFileOption('-add-stylesheet', project.file("javadoc-stylesheet.css"))
+
+	options {
+		links(
+				{%- if cookiecutter.includeMonkeyLib538 == "yes" %}
+				"https://maven.offsetmonkey538.top/javadoc/releases/top/offsetmonkey538/monkeylib538/monkeylib538/${project.monkeylib538_version}/raw/",
+				{%- endif %}
+				{%- if cookiecutter.includeFabricApi == "yes" %}
+				"https://maven.fabricmc.net/docs/fabric-api-${project.fapi_version}/",
+				{%- endif %}
+				"https://maven.fabricmc.net/docs/yarn-${project.yarn_version}/"
+		)
+	}
 }
 {%- endif %}
 
