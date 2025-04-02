@@ -10,7 +10,7 @@
 	"modGroup":                   "top.offsetmonkey538.{{ cookiecutter.modId|replace('-', '') }}",
 	"modAuthor":                  "OffsetMonkey538",
 	"modOrganization":            "OffsetMods538",
-	"modSources":                 "https://github.com/{% if cookiecutter.modOrganization == '' %}{{ cookiecutter.modAuthor }}{% else %}{{ cookiecutter.modOrganization }}{% endif %}/{{ cookiecutter.modName|replace(' ', '-') }}",
+	"modSources":                 "git@github.com:{% if cookiecutter.modOrganization == '' %}{{ cookiecutter.modAuthor }}{% else %}{{ cookiecutter.modOrganization }}{% endif %}/{{ cookiecutter.modName|replace(' ', '-') }}",
 
 	"includeBlockRegistryClass": [
 		"yes",
