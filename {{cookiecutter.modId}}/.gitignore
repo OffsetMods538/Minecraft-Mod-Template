@@ -6,6 +6,9 @@ classes
 
 # Fabric
 run/
+{%- if cookiecutter.includeDataGeneration == "yes" %}
+src/main/generated/*
+{%- endif %}
 
 # Java
 hs_err_*.log
