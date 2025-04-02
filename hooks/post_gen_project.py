@@ -62,9 +62,9 @@ shutil.rmtree("resources")
 shutil.rmtree("other")
 
 
-os.system("./gradlew outletPropertiesUpdate")
-os.system("./gradlew clean build")
-os.system("./gradlew genSourcesWithVineflower")
+#os.system("./gradlew outletPropertiesUpdate")
+#os.system("./gradlew clean build")
+#os.system("./gradlew genSourcesWithVineflower")
 os.system("./gradlew clean build")
 
 
