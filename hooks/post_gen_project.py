@@ -73,5 +73,5 @@ if "{{ cookiecutter.initGit }}" == "yes":
     os.system("git add --all")
     os.system("git commit -m \"Initial Commit\"")
     os.system("git branch -M master")
-    os.system("git remote add origin {{ cookiecutter.modSources }}.git")
+    os.system("git remote add origin {{ cookiecutter.gitSources }}.git")
     os.system("git push --set-upstream origin master --force")

@@ -1,7 +1,7 @@
 import dex.plugins.outlet.v2.util.ReleaseType
 
 plugins {
-	id 'fabric-loom' version '1.10-SNAPSHOT'
+	id 'fabric-loom' version '1.11-SNAPSHOT'
 	id 'io.github.dexman545.outlet' version '1.6.1'
 	id 'com.modrinth.minotaur' version '2.+'
 	{%- if cookiecutter.isLibrary == "yes" %}
@@ -9,10 +9,7 @@ plugins {
 	{%- endif %}
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = "{{ cookiecutter.modId }}"
+base.archivesName = "{{ cookiecutter.modId }}"
 group = "{{ cookiecutter.modGroup }}"
 version = "${project.mod_version}+${project.minecraft_version}"
 {%- if cookiecutter.isLibrary == "yes" %}
@@ -198,8 +195,10 @@ tasks.named("javadoc", Javadoc) {
 {%- endif %}
 
 jar {
+	inputs.property "archivesName", project.base.archivesName
+
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}" }
+		rename { "${it}_${inputs.properties.archivesName}" }
 	}
 }
 

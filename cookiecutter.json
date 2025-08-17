@@ -1,16 +1,17 @@
 {
-	"minecraftVersion":           "1.21",
-	"supportedMinecraftVersions": ">=1.20 <=1.21",
+	"minecraftVersion":           "1.21.8",
+	"supportedMinecraftVersions": "1.21.8",
 
 	"modName":                    "Mod Template",
 	"modId":                      "{{ cookiecutter.modName|lower|replace(' ', '-') }}",
-	"modVersion":                 "1.0.0",
+	"modVersion":                 "0.0.0",
 	"modDescription":             "Adds nothing",
 	"modMainClass":               "{{ cookiecutter.modName|replace(' ', '') }}",
 	"modGroup":                   "top.offsetmonkey538.{{ cookiecutter.modId|replace('-', '') }}",
 	"modAuthor":                  "OffsetMonkey538",
 	"modOrganization":            "OffsetMods538",
-	"modSources":                 "git@github.com:{% if cookiecutter.modOrganization == '' %}{{ cookiecutter.modAuthor }}{% else %}{{ cookiecutter.modOrganization }}{% endif %}/{{ cookiecutter.modName|replace(' ', '-') }}",
+	"modSources":                 "https://github.com/{% if cookiecutter.modOrganization == '' %}{{ cookiecutter.modAuthor }}{% else %}{{ cookiecutter.modOrganization }}{% endif %}/{{ cookiecutter.modName|replace(' ', '-') }}",
+	"gitSources":                 "git@github.com:{% if cookiecutter.modOrganization == '' %}{{ cookiecutter.modAuthor }}{% else %}{{ cookiecutter.modOrganization }}{% endif %}/{{ cookiecutter.modName|replace(' ', '-') }}",
 
 	"includeBlockRegistryClass": [
 		"yes",
@@ -64,7 +65,8 @@
 		"modGroup": "Enter the maven group for your mod:",
 		"modAuthor": "Enter the name of the author of the mod:",
 		"modOrganization": "Enter the name of the GitHub organization of the mod, use a space if there is none:",
-		"modSources": "Enter the link to your mods sources:",
+		"modSources": "Enter the link to your mods sources, MUST be an http(s) url!:",
+		"gitSources": "Enter the git repository for your mods sources:",
 
 		"includeBlockRegistryClass": "Do you want a block registry class? You will probably also want Fabric API.",
 		"includeItemRegistryClass": "Do you want an item registry class? You will probably also want Fabric API.",
@@ -72,7 +74,7 @@
 		"includeMonkeyLib538": "Do you want to include MonkeyLib538? This is my own library.",
 		"includeDataGeneration": "Do you want data generation? This *will* require Fabric API.",
 		"includeFabricApi": "Do you want Fabric API?",
-		"isLibrary": "Enables javadoc, maven publishing. Do not enable this unless you're me",
+		"isLibrary": "Enables javadoc, maven publishing. DO NOT enable this unless you're me",
 		"initGit": "Do you want a git repository to be initialized?"
 	}
 }
