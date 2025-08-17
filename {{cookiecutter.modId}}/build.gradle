@@ -34,7 +34,7 @@ loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		modid {
+		"{{ cookiecutter.modId }}" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}
@@ -49,20 +49,16 @@ loom {
 		client {
 			runDir "run/client"
 		}
-
-		{%- if cookiecutter.includeDataGeneration == "yes" %}
-		datagenClient {
-			inherit client
-			name "Data Generation"
-			vmArg "-Dfabric-api.datagen"
-			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-			vmArg "-Dfabric-api.datagen.modid={{ cookiecutter.modId }}"
-
-			runDir "build/datagen"
-		}
-		{%- endif %}
 	}
 }
+
+{%- if cookiecutter.includeDataGeneration == "yes" %}
+fabricApi {
+	configureDataGeneration {
+		client = true
+	}
+}
+{%- endif %}
 
 // https://gist.github.com/maityyy/3dbcd558d58a6412c3a2a38c72706e8e
 afterEvaluate {
@@ -71,18 +67,6 @@ afterEvaluate {
 		if (System.getenv("DISABLE_PROPERTIES_UPDATE") == null) vmArg "-Ddevauth.enabled=true"
 	}
 }
-
-{%- if cookiecutter.includeDataGeneration == "yes" %}
-sourceSets {
-	main {
-		resources {
-			srcDirs += [
-			        "src/main/generated"
-			]
-		}
-	}
-}
-{%- endif %}
 
 configurations {
 	includeModImplementation
@@ -166,7 +150,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
@@ -174,6 +158,9 @@ java {
 	{%- if cookiecutter.isLibrary == "yes" %}
 	withJavadocJar()
 	{%- endif %}
+
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 {%- if cookiecutter.isLibrary == "yes" %}

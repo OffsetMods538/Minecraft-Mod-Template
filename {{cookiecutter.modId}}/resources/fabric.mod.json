@@ -43,6 +43,7 @@
 		{%- if cookiecutter.includeMonkeyLib538 == "yes" %}
 		"monkeylib538": ">=${monkeylib538_version}",
 		{%- endif %}
-		"minecraft": "${supportedMinecraftVersions}"
+		"minecraft": "${supportedMinecraftVersions}",
+		"java": ">=21"
 	}
 }
