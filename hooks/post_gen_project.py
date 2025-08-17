@@ -40,8 +40,8 @@ if "{{ cookiecutter.includeConfigClass }}" == "yes":
 
 if "{{ cookiecutter.includeDataGeneration }}" == "yes":
     os.makedirs("src/main/generated", exist_ok=True)
-    os.makedirs(javaDir + "/datagen", exist_ok=True)
-    os.rename("java/ModDatagen.java", javaDir + "/datagen/{{ cookiecutter.modMainClass }}Datagen.java")
+    os.makedirs(clientJavaDir + "/datagen", exist_ok=True)
+    os.rename("java/ModDatagen.java", clientJavaDir + "/datagen/{{ cookiecutter.modMainClass }}Datagen.java")
 
 if "{{ cookiecutter.isLibrary }}" == "yes":
     os.rename("other/javadoc-stylesheet.css", "javadoc-stylesheet.css")
