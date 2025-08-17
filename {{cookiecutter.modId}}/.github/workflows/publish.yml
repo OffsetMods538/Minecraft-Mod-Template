@@ -27,15 +27,26 @@ jobs:
           cache-read-only: false
 {% if cookiecutter.includeDataGeneration == "yes" %}
       - name: Generate resources with Gradle
-        run: ./gradlew runDatagenClient
+        run: ./gradlew runDatagen
         env:
           DISABLE_PROPERTIES_UPDATE: true
-
 {% endif %}
       - name: Build with Gradle
         run: ./gradlew build
         env:
           DISABLE_PROPERTIES_UPDATE: true
+{% if cookiecutter.isLibrary == "yes" %}
+      - name: Publish to Maven
+        run: ./gradlew publishMavenPublicationToOffsetMods538Repository
+        env:
+          DISABLE_PROPERTIES_UPDATE: true
+          MAVEN_USERNAME: {{ '${{ secrets.MAVEN_USERNAME }}' }}
+          MAVEN_PASSWORD: {{ '${{ secrets.MAVEN_PASSWORD }}' }}
+{% endif %}
+      - name: Upload to GitHub
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/libs/*.jar
 
       - name: Upload to Modrinth
         run: ./gradlew modrinth
@@ -44,16 +55,3 @@ jobs:
           VERSION_NAME: {{ '${{ github.event.release.name }}' }}
           VERSION_IS_PRERELEASE: {{ '${{ github.event.release.prerelease }}' }}
           VERSION_CHANGELOG: {{ '${{ github.event.release.body }}' }}
-
-      - name: Upload to GitHub
-        uses: softprops/action-gh-release@v2
-        with:
-          files: build/libs/*.jar
-{% if cookiecutter.isLibrary == "yes" %}
-
-      - name: Publish to Maven
-        run: ./gradlew publishMavenPublicationToOffsetMonkey538Repository
-        env:
-          MAVEN_USERNAME: {{ '${{ secrets.MAVEN_USERNAME }}' }}
-          MAVEN_PASSWORD: {{ '${{ secrets.MAVEN_PASSWORD }}' }}
-{% endif %}

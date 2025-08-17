@@ -11,15 +11,26 @@ plugins {
 
 base.archivesName = "{{ cookiecutter.modId }}"
 group = "{{ cookiecutter.modGroup }}"
-version = "${project.mod_version}+${project.minecraft_version}"
-{%- if cookiecutter.isLibrary == "yes" %}
-if (System.getenv("IS_DEBUG") == "true") version = "${version}-${System.currentTimeMillis()}"
-{%- endif %}
+
+
+version = project.mod_version
+
+if ("true".equalsIgnoreCase(System.getenv("IS_DEBUG"))) {
+	version = "${version}-${System.currentTimeMillis()}"
+}
+
+final String customVersion = System.getenv("CUSTOM_VERSION")
+if (customVersion != null && !customVersion.isEmpty()) {
+	version = "${version}-${customVersion}"
+}
+
+version = "${version}+${project.minecraft_version}"
+println "Version: ${version}"
 
 outlet {
 	maintainPropertiesFile = System.getenv("DISABLE_PROPERTIES_UPDATE") == null
 	mcVersionRange = project.supported_minecraft_versions
-	allowedReleaseTypes = Set.of(ReleaseType.RELEASE)
+	allowedReleaseTypes = [ReleaseType.RELEASE]
 	propertiesData = [
 			{%- if cookiecutter.includeFabricApi == "yes" %}
 			'fapi_version': outlet.fapiVersion(project.minecraft_version),
@@ -169,9 +180,6 @@ tasks.named("javadoc", Javadoc) {
 
 	options {
 		links(
-				{%- if cookiecutter.includeMonkeyLib538 == "yes" %}
-				"https://maven.offsetmonkey538.top/javadoc/releases/top/offsetmonkey538/monkeylib538/monkeylib538/${project.monkeylib538_version}/raw/",
-				{%- endif %}
 				{%- if cookiecutter.includeFabricApi == "yes" %}
 				"https://maven.fabricmc.net/docs/fabric-api-${project.fapi_version}/",
 				{%- endif %}
@@ -190,18 +198,30 @@ jar {
 }
 
 modrinth {
+	// Main properties
 	token = System.getenv("MODRINTH_TOKEN")
 	projectId = "{{ cookiecutter.modId }}"
+	gameVersions = outlet.mcVersions()
+
+	// Version stuff
 	def customVersionName = System.getenv("VERSION_NAME")
 	if (customVersionName != null) versionName = customVersionName
+
 	versionNumber = "${project.version}"
-	versionType = "alpha"
+
 	def isPreRelease = System.getenv("VERSION_IS_PRERELEASE")
-	versionType = !"false".equals(isPreRelease) ? "beta" : "release"
+	versionType = "true".equalsIgnoreCase(isPreRelease) ? "beta" : "release"
+
+	if (project.mod_version.contains("beta")) versionType = "beta"
+	if (project.mod_version.contains("alpha")) versionType = "alpha"
+
+	// Files
 	uploadFile = remapJar.archiveFile
 	//additionalFiles = [sourcesJar.archiveFile, javadocJar.archiveFile]
 	additionalFiles = [sourcesJar.archiveFile]
-	gameVersions = outlet.mcVersions()
+
+
+	// Project info
 	syncBodyFrom = rootProject.file("README.md").text
 	def changelogEnv = System.getenv("VERSION_CHANGELOG")
 	if (changelogEnv != null) changelog = changelogEnv
@@ -222,11 +242,11 @@ tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
 publishing {
 	repositories {
 		maven {
-			name = "OffsetMonkey538"
+			name = "OffsetMods538"
 			url = "https://maven.offsetmonkey538.top/releases"
 			credentials {
-				username = providers.gradleProperty("OffsetMonkey538Username").getOrElse(System.getenv("MAVEN_USERNAME"))
-				password = providers.gradleProperty("OffsetMonkey538Password").getOrElse(System.getenv("MAVEN_PASSWORD"))
+				username = providers.gradleProperty("OffsetMods538Username").getOrElse(System.getenv("MAVEN_USERNAME"))
+				password = providers.gradleProperty("OffsetMods538Password").getOrElse(System.getenv("MAVEN_PASSWORD"))
 			}
 			authentication {
 				basic(BasicAuthentication)
@@ -239,12 +259,6 @@ publishing {
 
 			from(components["java"])
 		}
-	}
-	tasks.publishMavenPublicationToMavenLocal.doLast {
-		if (System.getenv("IS_DEBUG") == "true") System.out.println("Version: " + version)
-	}
-	tasks.publishMavenPublicationToOffsetMonkey538Repository.doLast {
-		if (System.getenv("IS_DEBUG") == "true") System.out.println("Version: " + version)
 	}
 }
 {%- endif %}
