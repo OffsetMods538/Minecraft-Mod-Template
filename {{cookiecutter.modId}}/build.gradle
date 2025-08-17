@@ -108,12 +108,12 @@ repositories {
 			includeGroup "me.djtheredstoner"
 		}
 	}
-	{%- if cookiecutter.includeMonkeyLib538 == "yes" %}
+	{%- if cookiecutter.includeConfigClass == "yes" %}
 	maven {
 		name = "OffsetMods538"
 		url  = "https://maven.offsetmonkey538.top/releases"
 		content {
-			includeGroup "top.offsetmonkey538.monkeylib538"
+			includeGroup "top.offsetmonkey538.offsetconfig538"
 		}
 	}
 	{%- endif %}
@@ -135,19 +135,16 @@ dependencies {
 	// includeModImplementation fabricApi.module("fabric-api-base", project.fapi_version)
 	{%- endif %}
 
-	{%- if cookiecutter.includeMonkeyLib538 == "yes" %}
+	{%- if cookiecutter.includeConfigClass == "yes" %}
 
-	// MonkeyLib538
-	modImplementation "top.offsetmonkey538.monkeylib538:monkeylib538:${project.monkeylib538_version}"
+	// OffsetConfig538
+	modImplementation "top.offsetmonkey538.offsetconfig538:offsetconfig538:${project.offsetconfig538_version}"
 	{%- endif %}
 }
 
 processResources {
 	final Map properties = Map<String, String>.of(
 			"modVersion",                 project.mod_version,
-			{%- if cookiecutter.includeMonkeyLib538 == "yes" %}
-			"monkeylib538_version",       project.monkeylib538_version,
-			{%- endif %}
 			"supportedMinecraftVersions", project.supported_minecraft_versions
 	)
 
@@ -229,9 +226,6 @@ modrinth {
 	dependencies {
 		{%- if cookiecutter.includeFabricApi == "yes" %}
 		required.project "fabric-api"
-		{%- endif %}
-		{%- if cookiecutter.includeMonkeyLib538 == "yes" %}
-		embedded.project "monkeylib538"
 		{%- endif %}
 	}
 }

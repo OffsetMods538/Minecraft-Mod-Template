@@ -28,11 +28,6 @@
 		"no"
 	],
 
-	"includeMonkeyLib538": [
-		"yes",
-		"no"
-	],
-
 	"includeDataGeneration": [
 		"yes",
 		"no"
@@ -70,8 +65,7 @@
 
 		"includeBlockRegistryClass": "Do you want a block registry class? You will probably also want Fabric API.",
 		"includeItemRegistryClass": "Do you want an item registry class? You will probably also want Fabric API.",
-		"includeConfigClass": "Do you want a config class? This *will* require MonkeyLib538.",
-		"includeMonkeyLib538": "Do you want to include MonkeyLib538? This is my own library.",
+		"includeConfigClass": "Do you want a config class? This adds my own library.",
 		"includeDataGeneration": "Do you want data generation? This *will* require Fabric API.",
 		"includeFabricApi": "Do you want Fabric API?",
 		"isLibrary": "Enables javadoc, maven publishing. DO NOT enable this unless you're me",
