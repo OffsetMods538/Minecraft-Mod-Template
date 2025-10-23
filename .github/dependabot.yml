@@ -4,7 +4,8 @@ version: 2
 updates:
 
   - package-ecosystem: "github-actions"
-    directory: "/\{\{cookiecutter.modId\}\}"
+    directories:
+      - "**/*" # https://github.com/dependabot/dependabot-core/issues/10525
     schedule:
       # Check for updates to GitHub Actions every week
       interval: "daily"
